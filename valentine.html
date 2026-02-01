@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>For Vidya 💖</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ffafbd, #ffc3a0);
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .box {
+      text-align: center;
+      background: white;
+      padding: 35px 45px;
+      border-radius: 20px;
+      box-shadow: 0 20px 35px rgba(0,0,0,0.25);
+      z-index: 5;
+    }
+
+    h1 {
+      color: #ff4d6d;
+      margin-bottom: 25px;
+    }
+
+    button {
+      padding: 14px 32px;
+      font-size: 18px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      margin: 12px;
+      transition: transform 0.2s;
+    }
+
+    #yes {
+      background: #ff4d6d;
+      color: white;
+      transform: scale(1);
+    }
+
+    #no {
+      background: #aaa;
+      color: white;
+      position: absolute;
+    }
+
+    /* Floating hearts + letters */
+    .heart {
+      position: absolute;
+      color: #ff4d6d;
+      font-size: 22px;
+      animation: float 7s linear infinite;
+      opacity: 0.85;
+      pointer-events: none;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) scale(0.8);
+        opacity: 0;
+      }
+      50% { opacity: 1; }
+      100% {
+        transform: translateY(-10vh) scale(1.2);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Romantic Music -->
+  <audio autoplay loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="box">
+    <h1>Vidya 💕<br>Will you be my Valentine?</h1>
+    <button id="yes" onclick="sayYes()">Yes 💖</button>
+    <button id="no">No 🙈</button>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("no");
+    const yesBtn = document.getElementById("yes");
+    let yesScale = 1;
+
+    // No button escapes + Yes grows
+    noBtn.addEventListener("mouseover", () => {
+      const x = Math.random() * (window.innerWidth - 120);
+      const y = Math.random() * (window.innerHeight - 60);
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+
+      yesScale += 0.15;
+      yesBtn.style.transform = `scale(${yesScale})`;
+    });
+
+    // Yes clicked
+    function sayYes() {
+      document.body.innerHTML = `
+        <div style="
+          text-align:center;
+          color:white;
+          font-size:34px;
+          padding:30px;
+        ">
+          💖 Congratulations Vidya! 💖<br><br>
+          See you on Feb 14 🥰🌹
+        </div>
+      `;
+      document.body.style.background =
+        "linear-gradient(135deg, #ff758c, #ff7eb3)";
+    }
+
+    // Floating hearts spelling VIDYA
+    const letters = ["❤️ V", "❤️ I", "❤️ D", "❤️ Y", "❤️ A"];
+
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerText = letters[Math.floor(Math.random() * letters.length)];
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration =
+        (Math.random() * 3 + 4) + "s";
+
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 7000);
+    }
+
+    setInterval(createHeart, 250);
+  </script>
+
+</body>
+</html>
